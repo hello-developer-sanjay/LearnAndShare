@@ -26,7 +26,7 @@ const AdminDashboard = () => {
         if (user) {
             console.log('User loaded in Admin Dashboard:', user);
             if (user.role === 'admin') {
-                axios.get('http://localhost:5000/api/users')
+                axios.get('https://learnandshare-api-27dec.onrender.com/api/users')
                     .then(response => {
                         setAllUsers(response.data);
                         setUserLoading(false); // Update state once users are loaded
