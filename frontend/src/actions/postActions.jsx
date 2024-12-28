@@ -18,7 +18,7 @@ export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
 
 export const fetchPostBySlug = (slug) => async dispatch => {
     try {
-        const res = await axios.get(`https://hogwartsedx-api-16july.onrender.com/api/posts/post/${slug}`);
+        const res = await axios.get(`https://learnandshare-api-27dec.onrender.com/api/posts/post/${slug}`);
         dispatch({ type: FETCH_POST_SUCCESS, payload: res.data });
     } catch (error) {
     }
@@ -26,7 +26,7 @@ export const fetchPostBySlug = (slug) => async dispatch => {
 // Search blog posts
 export const searchPosts = (keyword) => async (dispatch) => {
     try {
-        const res = await axios.get(`https://hogwartsedx-api-16july.onrender.com/api/posts/search?keyword=${keyword}`);
+        const res = await axios.get(`https://learnandshare-api-27dec.onrender.com/api/posts/search?keyword=${keyword}`);
         dispatch({ type: 'SEARCH_POSTS_SUCCESS', payload: res.data });
     } catch (error) {
     }
@@ -36,7 +36,7 @@ export const fetchPosts = () => async dispatch => {
         setAuthToken(localStorage.token);
     }
     try {
-        const res = await axios.get('https://hogwartsedx-api-16july.onrender.com/api/posts');
+        const res = await axios.get('https://learnandshare-api-27dec.onrender.com/api/posts');
         dispatch({ type: FETCH_POSTS_SUCCESS, payload: res.data });
     } catch (error) {
     }
@@ -50,7 +50,7 @@ export const fetchUserPosts = () => async dispatch => {
     dispatch({ type: FETCH_USER_POSTS_REQUEST });
 
     try {
-        const res = await axios.get('https://hogwartsedx-api-16july.onrender.com/api/posts/user', {
+        const res = await axios.get('https://learnandshare-api-27dec.onrender.com/api/posts/user', {
             headers: {
                 'x-auth-token': token
             }
@@ -73,7 +73,7 @@ export const addPost = (title, content, category, subtitles, summary, titleImage
         return;
     }
     try {
-        const res = await axios.post('https://hogwartsedx-api-16july.onrender.com/api/posts', {
+        const res = await axios.post('https://learnandshare-api-27dec.onrender.com/api/posts', {
             title,
             content,
             category,
@@ -103,7 +103,7 @@ export const updatePost = (postId, title, content) => async (dispatch, getState)
         setAuthToken(localStorage.token);
     }
     try {
-        const res = await axios.put(`https://hogwartsedx-api-16july.onrender.com/api/posts/${postId}`, { title, content }, {
+        const res = await axios.put(`https://learnandshare-api-27dec.onrender.com/api/posts/${postId}`, { title, content }, {
             headers: {
                 'x-auth-token': token
             }
@@ -119,7 +119,7 @@ export const deletePost = (postId) => async dispatch => {
         setAuthToken(localStorage.token);
     }
     try {
-        await axios.delete(`https://hogwartsedx-api-16july.onrender.com/api/posts/${postId}`, {
+        await axios.delete(`https://learnandshare-api-27dec.onrender.com/api/posts/${postId}`, {
             headers: {
                 'x-auth-token': token
             }
@@ -140,7 +140,7 @@ export const markPostAsCompleted = (postId) => async (dispatch, getState) => {
     }
 
     try {
-        const res = await axios.put(`https://hogwartsedx-api-16july.onrender.com/api/posts/complete/${postId}`, null, {
+        const res = await axios.put(`https://learnandshare-api-27dec.onrender.com/api/posts/complete/${postId}`, null, {
             headers: {
                 'x-auth-token': token
             }
@@ -174,7 +174,7 @@ export const fetchCompletedPosts = () => async (dispatch, getState) => {
     if (!token) return;
 
     try {
-        const res = await axios.get('https://hogwartsedx-api-16july.onrender.com/api/posts/completed', {
+        const res = await axios.get('https://learnandshare-api-27dec.onrender.com/api/posts/completed', {
             headers: {
                 'x-auth-token': token
             }
