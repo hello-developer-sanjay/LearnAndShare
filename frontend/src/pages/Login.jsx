@@ -180,7 +180,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'https://eventmanager-api-19july.onrender.com/api/auth/google';
+    window.location.href = 'https://learnandshare-api-27dec.onrender.com/api/auth/google';
 
   };
 
