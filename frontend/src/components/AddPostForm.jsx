@@ -181,7 +181,7 @@ const AddPostForm = () => {
         formData.append('image', file);
 
         try {
-            const res = await axios.post('https://hogwartsedx-api-16july.onrender.com/upload/image', formData, {
+            const res = await axios.post('https://learnandshare-api-27dec.onrender.com/upload/image', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setImage(res.data.filePath);
@@ -196,7 +196,7 @@ const AddPostForm = () => {
         formData.append('video', file);
 
         try {
-            const res = await axios.post('https://hogwartsedx-api-16july.onrender.com/upload/video', formData, {
+            const res = await axios.post('https://learnandshare-api-27dec.onrender.com/upload/video', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setVideo(res.data.filePath);
