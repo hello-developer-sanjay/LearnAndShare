@@ -10,7 +10,7 @@ const ResetPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`https://hogwartsedx-api-16july.onrender.com/api/auth/reset-password/${token}`, { password });
+            const response = await axios.post(`https://learnandshare-api-27dec.onrender.com/api/auth/reset-password/${token}`, { password });
             setMessage(response.data.message);
         } catch (error) {
             setMessage(error.response.data.message);
