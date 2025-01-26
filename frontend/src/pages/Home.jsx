@@ -1,22 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
- import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet';
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 `;
 
 const HomeContainer = styled.div`
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,218 +35,121 @@ const HomeContainer = styled.div`
     bottom: 0;
     background: url('https://sanjaybasket.s3.ap-south-1.amazonaws.com/wallpaper.jpg');
     background-size: cover;
-    filter: blur(5px);
+    background-position: center;
+    filter: blur(6px) brightness(0.65);
     z-index: -1;
-    transition: filter 0.3s ease-in-out;
-  }
-
-  &:hover::before {
-    filter: blur(3px);
   }
 `;
 
-const Section = styled.div`
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  animation: ${fadeIn} 1.5s forwards;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 20px;
+  padding: 20px;
+  animation: ${fadeIn} 1.5s ease-out;
 
-  &.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`;
+
+const TextContainer = styled.div`
+  flex: 1;
+  text-align: center;
+  animation: ${fadeIn} 2s ease-out;
+
+  @media (min-width: 768px) {
+    text-align: left;
+    padding-right: 20px;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
-  animation: ${fadeIn} 1.5s 0.3s forwards;
-  color: #ffcc80;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(90deg, #ffcc80, #ff6f00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1.5px;
+
+  @media (min-width: 768px) {
+    font-size: 4rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
+  }
 `;
 
 const Subtitle = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 40px;
-  animation: ${fadeIn} 1.5s 0.6s forwards;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
   color: #ffcc80;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 `;
 
-const Content = styled.p`
-  font-size: 1.2rem;
-  max-width: 800px;
-  margin-bottom: 20px;
-  animation: ${fadeIn} 1.5s 0.9s forwards;
-  color: #ffcc80;
+const GifContainer = styled.div`
+  flex: 1;
+  max-width: 600px;
+  width: 100%;
+
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
 `;
 
 const CallToAction = styled.button`
-  position: relative;
-  overflow: hidden;
   background: linear-gradient(45deg, #ff6f00, #ffcc80);
   color: #1a1a1a;
-  padding: 0.6rem 0.8rem;
-  border: 2px solid #ff6f00;
+  padding: 0.7rem 1.5rem;
+  border: none;
   border-radius: 30px;
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1rem;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s, color 0.3s;
   cursor: pointer;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
 
   &:hover {
     background: linear-gradient(to bottom right, #8a2be2, #4a90e2);
     color: #fff;
-    transform: translateY(-7px);
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
   }
 
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: linear-gradient(45deg, #ff6f00, #ffcc80);
-    border-radius: 30px;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s;
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
   }
 
-  &:hover:before {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-
-  &:after {
-    content: 'Explore';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-  }
-
-  &:hover:after {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-`;
-
-const CarouselContainer = styled.div`
-  width: 100%;
-
-  .slick-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-const CarouselImage = styled.img`
-  width: 100%;
-  max-width: 800px;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
-
-const FeaturesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 50px;
-`;
-
-const FeatureCard = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 20px;
-  margin: 10px;
-  width: 250px;
-  text-align: center;
-  transition: transform 0.3s, background 0.3s;
-  color: #ffcc80;
-
-  &:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  h3 {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-  }
-
-  p {
-    font-size: 1rem;
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
   }
 `;
 
 const Home = () => {
-  const sectionsRef = useRef([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1
-      }
-    );
-
-    sectionsRef.current.forEach(section => {
-      if (section) observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   const handleGetStartedClick = () => {
     navigate('/explore');
-  };
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 2200,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
   };
 
   return (
@@ -292,53 +195,18 @@ Furthermore, Learn And Share offers a unique feature where users can choose to f
 
 
   </Helmet>	
-      <Title>LearnAndShare</Title>
-      <Subtitle>Where Technology Powers Next-Level Learning</Subtitle>
-      <CarouselContainer>
-        <Slider {...settings}>
-          <div>
-            <CarouselImage src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/HogwartsEdX/house+2.webp" alt="Learning and Sharing" />
-          </div>
-          <div>
-            <CarouselImage src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/HogwartsEdX/house+1.webp" alt="Learning and Sharing" />
-          </div>
-          <div>
-            <CarouselImage src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/HogwartsEdX/house_3.webp" alt="Learning and Sharing" />
-          </div>
-        </Slider>
-      </CarouselContainer>
-      <Section ref={el => sectionsRef.current[2] = el}>
-        <Content>Explore courses that take you on a magical journey through technology and beyond. Learn with the best, from the best, and become the best version of yourself.</Content>
-      </Section>
-      <Section ref={el => sectionsRef.current[3] = el}>
-        <CallToAction onClick={handleGetStartedClick} aria-label="Get Started">Get Started</CallToAction>
-      </Section>
-      <FeaturesContainer>
-        <FeatureCard>
-          <h3>Interactive Courses</h3>
-          <p>Engage with dynamic and interactive content to enhance your learning experience.</p>
-        </FeatureCard>
-        <FeatureCard>
-          <h3>Expert Tutorials</h3>
-          <p>Learn from industry experts through detailed and comprehensive tutorials.</p>
-        </FeatureCard>
-        <FeatureCard>
-          <h3>User Blogs</h3>
-          <p>Share your knowledge and insights with a community of learners.</p>
-        </FeatureCard>
-        <FeatureCard>
-          <h3>Personalized Learning</h3>
-          <p>Customize your learning path to suit your interests and goals.</p>
-        </FeatureCard>
-        <FeatureCard>
-          <h3>Certificate Verification</h3>
-          <p>Earn certificates for completed courses and verify them easily on our platform.</p>
-        </FeatureCard>
-        <FeatureCard>
-          <h3>Stay Updated</h3>
-          <p>Follow categories and receive email notifications for new posts and updates.</p>
-        </FeatureCard>
-      </FeaturesContainer>
+      <ContentWrapper>
+        <TextContainer>
+          <Title>LearnAndShare</Title>
+          <Subtitle>Empowering the Future Through Technology</Subtitle>
+          <CallToAction onClick={handleGetStartedClick} aria-label="Get Started">
+            Get Started
+          </CallToAction>
+        </TextContainer>
+        <GifContainer>
+          <img src="https://sanjaybasket.s3.ap-south-1.amazonaws.com/Student-home-header-1.gif" alt="Learning and Sharing" />
+        </GifContainer>
+      </ContentWrapper>
     </HomeContainer>
   );
 };
