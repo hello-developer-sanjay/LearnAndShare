@@ -35,6 +35,8 @@
     "download": "^8.0.0",
     "downloadjs": "^1.4.7",
     "file-saver": "^2.0.5",
+        "react-markdown": "^10.1.0",
+
     "framer-motion": "^10.18.0",
     "html-to-image": "^1.11.11",
     "jspdf": "^2.5.1",
