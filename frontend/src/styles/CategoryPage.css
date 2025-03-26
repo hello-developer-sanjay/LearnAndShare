@@ -88,3 +88,67 @@
         font-size: 1.2rem;
     }
 }
+.chat-message {
+    position: relative;
+    padding: 8px 40px 8px 8px; /* Space for buttons */
+}
+
+.message-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 2px 5px;
+    font-size: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.edit-message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-message input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.edit-message button {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-message button:nth-child(3) { /* Cancel button */
+    background-color: #6c757d;
+}
+
+.edit-message button:hover {
+    opacity: 0.9;
+}
