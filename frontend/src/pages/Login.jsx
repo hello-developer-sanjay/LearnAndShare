@@ -180,7 +180,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'https://learnandshare-api-27dec.onrender.com/api/auth/google';
+    window.location.href = 'https://zupewh60yi.execute-api.ap-south-1.amazonaws.com/default/learnandshare-api/api/auth/google';
 
   };
 
