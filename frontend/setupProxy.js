@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://zupewh60yi.execute-api.ap-south-1.amazonaws.com/default/learnandshare-api',
+      target: 'https://zupewh60yi.execute-api.ap-south-1.amazonaws.com/prod',
       changeOrigin: true,
     })
   );
