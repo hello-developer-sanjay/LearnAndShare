@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://eduxcel-api3-j9a2.onrender.com',
+      target: 'https://zupewh60yi.execute-api.ap-south-1.amazonaws.com/default/learnandshare-api',
       changeOrigin: true,
     })
   );
